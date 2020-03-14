@@ -1,0 +1,46 @@
+# 자바스크립트 자료형  
+## 기본 자료형  
+1. 숫자(number)  
+``` javascript
+var no = 1;
+console.log(typeof no);  // number
+console.log(no);         // 1
+```  
+2. 문자열(String)  
+``` javascript
+var s = a;
+console.log(typeof s);  // string
+console.log(s);         // a
+```  
+3. 불린형(boolean)  
+``` javascript
+var b = true; //또는 false
+console.log(typeof b);  // boolean
+console.log(b);         // true 또는 false
+```  
+4. null
+``` javascript
+var n = null;
+console.log(n);         // null
+console.log(typeof n);  // object
+
+console.log(typeof n === null);   // false
+console.log(n === null);          // true
+```  
+타입이 object로 되어 있어, 주의가 필요하다.  
+- 값이 비어있음을 명시적으로 표시할 때 사용  
+- 주로 객체를 담은 변수를 초기화할 때 사용
+- null이라는 값을 할당한다
+5. undefined  
+``` javascript
+var d;
+console.log(d);         // undefined
+console.log(typeof d);  // undefined
+```  
+다른 타입과는 다르게 타입이자 값을 나타낸다.  
+- null처럼 값이 비어있음을 나타냄  
+- 일반적으로 값을 할당하지 않는다. (d = undefined처럼 사용은 가능)
+6. symbol
+
+
+## 참조 자료형  
