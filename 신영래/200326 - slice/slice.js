@@ -83,9 +83,10 @@ function action(person)
     var result = 0;
     for(var i = 0; i < resultArr.length; i++)
     {
-        if(i <= 1 )
+        // 3명의 경우, 첫번째와 두번째는 인원대로 자를 수 없다
+        if( i + 1 < person )
         {
-            result += Math.ceil( resultArr[i] / person );
+            result += 1;
         }else
         {
             result += ( resultArr[i] / person );
