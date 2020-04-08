@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<script>
+			var dNum; //입력숫자
+			var numList = []; //숫자 배열
+			var numList2 = [] //식 배열
+			var resultArray = [] //결과 배열
+			var startNum = 100; //시작 숫자
+			var endNum = 355; //종료 숫자
+			
+			
+			function startFn(){
+				//시작숫자부터 종료숫자까지 검사를 위해 반복문 실행
+				for(var i=startNum; i<endNum+1; i++){
+					initfn(i.toString());
+				}
+				
+				//결과값
+				console.log(resultArray);
+			}
+			
+			//입력 받은 숫자로 숫자가 가실수있는 묶음 경우의 수를 뽑아낸다.
+			//ex) 123 -> 1,23 / 12,3 / 1,2,3
+			//앞에서부터 묶고 나머지를 또 묶어주면 경우의 수가 나오더라.
+			function initfn(_num){
+				dNum = _num;
+				for(var i=1; i<dNum.length; i++){
+					var firstNum = dNum.substring(0,i);
+					var lastNum = dNum.substring(i,dNum.length)
+					numList.push(mergeNum(firstNum,lastNum));
+					
+					//묶고 남은 숫자를 다시 반복해서 묶어준다.
+					//1자리 숫자가 될때까지 재귀
+					if(lastNum.length > 1){
+						repeatFn(firstNum,lastNum);
+					}
+				}
+				
+				//묶어진 숫자
+				//.log(numList);
+				//다묶어 준 후 그 숫자 사이에 사칙연산을 넣어준다.
+				splitNum();
+			}
+			
+			function repeatFn(firstNum,lastNum){
+				var dNum = lastNum;
+				for(var i=1; i<dNum.length; i++){
+					var rfNum = dNum.substring(0,i);
+					var rlNum = dNum.substring(i,dNum.length)
+					numList.push(firstNum + "," + mergeNum(rfNum,rlNum));
+					if(rlNum.length > 1){
+						repeatFn(firstNum + "," +rfNum,rlNum);
+					}
+				}
+			}
+			
+			//숫자사이에 ,를 넣어서 묶어준다.
+			function mergeNum(fNum,lNum){
+				var mNum = fNum + "," + lNum;
+				return mNum;
+			}
+			
+			
+			
+			var tempArray = new Array();
+			var op = ["+","-","*","/"];
+			var result = new Array(); //
+			var r; //입력받은배열 length -1
+			var n = op.length; //사칙연산 배열 length
+			
+			
+			//묶어진 숫자 배열을에 ,사이에 사칙연산을 넣어준다.
+			function splitNum(){
+				for(var i=0; i<numList.length; i++){
+					//묶인 숫자 배열을 다시 쪼개서 배열로 만든다.
+					tempArray = numList[i].split(',');
+					r = tempArray.length - 1
+					//중복순열
+					opAddFn(n,r,result);
+				}
+				//console.log(numList2);
+				reverseFn();
+			}
+
+			function opAddFn(n, r, result){
+				if(result.length == r){
+					var resultStr = "";
+					for(var i = 0; i< r; i++){
+						if(i == 0){
+							resultStr += tempArray[i] + result[i] + tempArray[i+1];
+						}else{
+							resultStr += result[i] + tempArray[i+1];
+						}
+						//console.log(tempArray[0] + result[0] + tempArray[1] + result[1] + tempArray[2]);	 
+					}
+					if(eval(resultStr) > -1 && eval(resultStr) ){
+						numList2.push(resultStr);
+					}
+					
+					return;
+				}
+				for(var k =0; k<n; k++){
+					result.push(op[k]);
+					opAddFn(n, r, result);
+					result.pop();
+				}
+			}
+			
+			function reverseFn(){
+				var reverseNum = dNum.split("").reverse().join("");
+				
+				for(var i=0; i<numList2.length; i++){
+					if(reverseNum == eval(numList2[i]).toString()){
+						resultArray.push(dNum + " → " + numList2[i] + " = " + eval(numList2[i]).toString());
+						
+					}
+				}
+			}
+			
+		</script>
+	</head>
+	<body onload="startFn()">
+	
+	
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<script>
+			var numArray = new Array();
+			var startNum;
+			
+			function startFn(){//뒤집어진 카드 100장 준비
+				for(var i=0; i < 100; i++){
+					numArray[i] = 0;
+				}//시작숫자 2
+				startNum = 2;
+				calFn(startNum,numArray)
+			}
+			
+			function calFn(sNum,nArray){
+				//console.log(numArray)
+				//100번째 장까지 뒤집고나면 뒤집을게없음으로 종료
+				if(sNum == 101){
+					//100까지 돌고 넘어온순간 종료 
+					//결과값 출력
+					console.log(numArray)
+					return;
+				}
+				for(var i=1; i < 101; i++){
+					//n의 숫자가 n-1간격만큼 증가한다는건 n의 배수라는 뜻임으로 해당숫자를 n으로 나눴을때 나머지가 0이면 트루
+					if(i % sNum == 0){
+						if(nArray[i-1] != 0){
+							nArray[i-1] = 0;
+						}else{
+							nArray[i-1] = i;
+						}
+					}
+				}
+				//n을 1씩 증가 시켜서 100이될때까지 실행
+				calFn(sNum+1,nArray)
+			}
+			startFn()
+			
+		</script>
+	</head>
+	<body>
+	
+	
+	</body>
+</html>
